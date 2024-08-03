@@ -15,8 +15,6 @@ namespace CounterSalary.Core.Services
 
         public SalaryService()
         {
-            _culture = CultureInfo.CurrentCulture;
-            Salary = new Salary(_culture);
         }
 
         [JsonConstructor]
@@ -28,6 +26,8 @@ namespace CounterSalary.Core.Services
 
         public override void Initialize()
         {
+            _culture = CultureInfo.CurrentCulture;
+            Salary = new Salary(_culture);
         }
 
         public void SetCurrentSalaryOfWeek(long value)
