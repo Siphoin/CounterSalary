@@ -7,18 +7,16 @@
 
     public class StorageService : ServiceBase
     {
-        private readonly string _storageFolderName = "storage"; // Имя папки для хранения
+        private readonly string _storageFolderName = "storage";
         private readonly string _storagePath;
 
         public StorageService()
         {
-            // Определяем путь к папке для хранения
             _storagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _storageFolderName);
         }
 
         public override void Initialize()
         {
-            // Создаем папку, если она не существует
             if (!Directory.Exists(_storagePath))
             {
                 Directory.CreateDirectory(_storagePath);
