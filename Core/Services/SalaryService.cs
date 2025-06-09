@@ -21,12 +21,12 @@ namespace CounterSalary.Core.Services
         public SalaryService(Salary salary)
         {
             Salary = salary;
+            _culture = CultureInfo.CurrentCulture;
         }
 
 
         public override void Initialize()
         {
-            _culture = CultureInfo.CurrentCulture;
             Salary = new Salary(_culture);
         }
 
