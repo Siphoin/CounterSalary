@@ -2,4 +2,5 @@
 
 Счетчик зарплаты на Windows Forms
 
-![image](https://github.com/user-attachments/assets/53ffdad9-6d70-4431-a784-8144f03ee19e)
+![image](https://github.com/user-attachments/assets/40f88eab-5128-4d1c-9cbc-ac4d6b3991ea)
+
