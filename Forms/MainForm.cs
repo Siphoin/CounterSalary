@@ -91,5 +91,11 @@ namespace CounterSalary
         {
             _salaryService.SetCurrentSalaryOfYear(0);
         }
+
+        private void ButtonCopy_Click(object sender, EventArgs e)
+        {
+            string data = $"{_salaryService.Salary.CurrentValue} {_salaryService.Salary.Format}:\nYou must pay:\n{_salaryService.Salary.GetValueWeek()}";
+            Clipboard.SetText(data);
+        }
     }
 }

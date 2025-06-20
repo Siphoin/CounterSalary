@@ -38,6 +38,7 @@
             this._yearText = new System.Windows.Forms.Label();
             this._yearLabel = new System.Windows.Forms.Label();
             this._buttonResetYear = new System.Windows.Forms.Button();
+            this._buttonCopy = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.salary)).BeginInit();
             this.SuspendLayout();
             // 
@@ -171,11 +172,23 @@
             this._buttonResetYear.UseVisualStyleBackColor = true;
             this._buttonResetYear.Click += new System.EventHandler(this.ButtonResetYear_Click);
             // 
+            // _buttonCopy
+            // 
+            this._buttonCopy.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this._buttonCopy.Location = new System.Drawing.Point(656, 62);
+            this._buttonCopy.Name = "_buttonCopy";
+            this._buttonCopy.Size = new System.Drawing.Size(131, 26);
+            this._buttonCopy.TabIndex = 11;
+            this._buttonCopy.Text = "Copy Week";
+            this._buttonCopy.UseVisualStyleBackColor = true;
+            this._buttonCopy.Click += new System.EventHandler(this.ButtonCopy_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 500);
+            this.Controls.Add(this._buttonCopy);
             this.Controls.Add(this._buttonResetYear);
             this.Controls.Add(this._yearLabel);
             this.Controls.Add(this._yearText);
@@ -212,6 +225,7 @@
         private System.Windows.Forms.Label _yearText;
         private System.Windows.Forms.Label _yearLabel;
         private System.Windows.Forms.Button _buttonResetYear;
+        private System.Windows.Forms.Button _buttonCopy;
     }
 }
 
