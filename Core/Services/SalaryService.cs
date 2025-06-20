@@ -11,7 +11,8 @@ namespace CounterSalary.Core.Services
 
         private readonly CultureInfo _culture;
 
-        public event Action OnChangeValue;
+        public event Action OnChangeValueWeek;
+        public event Action OnChangeValueYear;
 
         public SalaryService()
         {
@@ -32,9 +33,15 @@ namespace CounterSalary.Core.Services
 
         public void SetCurrentSalaryOfWeek(long value)
         {
-            Salary.Value = value;
-            Salary.Days = value > 0 ? Salary.Days + 1 : 0;
-            OnChangeValue?.Invoke();
+            Salary.ValueWeek = value;
+            Salary.CurrentValue = value > 0 ? Salary.CurrentValue + 1 : 0;
+            OnChangeValueWeek?.Invoke();
+        }
+
+        public void SetCurrentSalaryOfYear(long value)
+        {
+            Salary.OfYear = value;
+            OnChangeValueYear?.Invoke();
         }
     }
 }

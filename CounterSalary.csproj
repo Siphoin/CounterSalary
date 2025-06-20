@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Models\FormatWorkType.cs" />
     <Compile Include="Core\Models\Salary.cs" />
     <Compile Include="Core\Services\SalaryService.cs" />
     <Compile Include="Core\Services\ServiceBase.cs" />

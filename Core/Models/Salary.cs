@@ -1,5 +1,4 @@
-﻿using CounterSalary.Core.Services;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Globalization;
 
@@ -10,9 +9,15 @@ namespace CounterSalary.Core.Models
     {
         private CultureInfo _culture;
 
-        public long Value { get; set; }
-        public int Days { get; set; }
+        [JsonProperty("Value")]
+        public long ValueWeek { get; set; }
+
+        [JsonProperty("Days")]
+        public int CurrentValue { get; set; }
+        public long OfYear { get; set; }
         public int Increase { get; set; }
+        public FormatWorkType Format { get; set; }
+
         public Salary() { }
 
         public Salary(CultureInfo cultureInfo)
@@ -20,16 +25,16 @@ namespace CounterSalary.Core.Models
             _culture = cultureInfo;
         }
 
-
-        [JsonConstructor]
-        public Salary(long value)
+        public string GetValueWeek ()
         {
-            Value = value;
+            return ValueWeek.ToString("C", _culture);
         }
 
-        public override string ToString()
+        public string GetValueYear ()
         {
-            return Value.ToString("C", _culture);
+            return OfYear.ToString("C", _culture);
         }
+
+       
     }
 }

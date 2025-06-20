@@ -1,13 +1,7 @@
 ﻿using CounterSalary.Core.Models;
 using CounterSalary.Core.Services;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -33,27 +27,38 @@ namespace CounterSalary
 
         private async void Form1_Load(object sender, EventArgs e)
         {
+            await LoadSaveSalaryData();
+        }
+
+        private async Task LoadSaveSalaryData()
+        {
             _storageService = (StorageService)Provider.Single(x => x is StorageService);
             _salaryService = (SalaryService)Provider.Single(x => x is SalaryService);
             if (_storageService.Exits<Salary>())
             {
                 _salaryService.Salary = await _storageService.Read<Salary>();
             }
-            _salaryService.OnChangeValue += OnChangeValueSalary;
+            _salaryService.OnChangeValueWeek += OnChangeValueSalary;
+            _salaryService.OnChangeValueYear += OnChangeValueYear;
             OnChangeValueSalary();
             salary.Value = _salaryService.Salary.Increase;
+            _formatWork.SelectedIndex = (int)_salaryService.Salary.Format;
+            _yearText.Text = _salaryService.Salary.GetValueYear();
+
         }
 
         private void OnChangeValueSalary()
-        {
-            salaryText.Text = _salaryService.Salary.ToString();
-            daysText.Text = $"Days {_salaryService.Salary.Days}";
+        {         
+            _salaryText.Text = _salaryService.Salary.GetValueWeek();
+            _daysText.Text = $"{_salaryService.Salary.Format} {_salaryService.Salary.CurrentValue}";
+
         }
 
         private void Calculate(object sender, EventArgs e)
         {
             long salaryValue = Convert.ToInt64(salary.Text);
-            _salaryService.SetCurrentSalaryOfWeek(_salaryService.Salary.Value +  salaryValue);
+            _salaryService.SetCurrentSalaryOfWeek(_salaryService.Salary.ValueWeek +  salaryValue);
+            _salaryService.SetCurrentSalaryOfYear(_salaryService.Salary.OfYear + salaryValue);
         }
 
         private void NewWeek(object sender, EventArgs e)
@@ -66,9 +71,25 @@ namespace CounterSalary
             await _storageService.Save(_salaryService.Salary);
         }
 
-        private void salary_ValueChanged(object sender, EventArgs e)
+        private void SalaryWeekChanged(object sender, EventArgs e)
         {
             _salaryService.Salary.Increase = (int)salary.Value;
+        }
+
+        private void OnChangeValueYear()
+        {
+            _yearText.Text = _salaryService.Salary.GetValueYear();
+        }
+
+        private void FormatWorkChanged(object sender, EventArgs e)
+        {
+            _salaryService.Salary.Format = (FormatWorkType)_formatWork.SelectedIndex;
+            _daysText.Text = $"{_salaryService.Salary.Format} {_salaryService.Salary.CurrentValue}";
+        }
+
+        private void ButtonResetYear_Click(object sender, EventArgs e)
+        {
+            _salaryService.SetCurrentSalaryOfYear(0);
         }
     }
 }
